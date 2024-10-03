@@ -1,0 +1,29 @@
+// Function that processes an array and returns a promise
+const lowerCaseWords = (mixedArray) => {
+  return new Promise((resolve, reject) => {
+
+    // Check if the input is an array
+    if (Array.isArray(mixedArray)) {
+
+      // Filter out all non-string elements and convert the remaining strings to lowercase
+      const result = mixedArray
+        .filter(item => typeof item === 'string')  // Keep only strings
+        .map(word => word.toLowerCase());         // Convert them to lowercase
+
+      // Resolve the promise with the processed array of lowercase strings
+      resolve(result);
+    } else {
+
+      // If the input is not an array, reject the promise with an error message
+      reject('Input is not an array');
+    }
+  });
+};
+
+// Example usage of the function
+const mixedArray = ['PIZZA', 10, true, 25, false, 'Wings'];
+
+// Call the function and handle the promise result
+lowerCaseWords(mixedArray)
+  .then(result => console.log(result))  // If successful, print the lowercase words
+  .catch(error => console.error(error));  // If there's an error, print the error message
